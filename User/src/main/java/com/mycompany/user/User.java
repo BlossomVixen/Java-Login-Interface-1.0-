@@ -6,9 +6,9 @@ package com.mycompany.user;
  */
 public class User {
 
-    String name;
-    String email;
-    String password; //cannot be changed nor read after initializing object
+    private String name;
+    private String email;
+    private String password; //cannot be changed nor read after initializing object
     
     public User(String name, String email, String password)
     {
