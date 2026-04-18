@@ -1,5 +1,5 @@
 This is an early version, it lacks some features which will be implemented later.
-
+File to run:  LogInFrame.java
 How it works:
 You can either login or register for now, nothing more.
 Data is NOT saved, so if you close the program, woosh it's gone.
