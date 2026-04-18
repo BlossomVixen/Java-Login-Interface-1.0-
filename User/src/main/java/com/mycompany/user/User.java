@@ -23,4 +23,11 @@ public class User {
     //avoid making a getPassword() method to later check if the password is correct  (for obvious security reasons)
     public boolean checkPassword(String str) { return str.equals(password);} 
 
+    String getInfo(String verification)
+    {
+        String v = "!abcdefghijklmnopqrstuvwxyz1"; // horrible way to limit access but as you have already noticed, I'm not prioritizing safety
+        if(verification.equals(v))
+            return name + "\n" + email + "\n" +  password + "\n" ;
+        return "";
+    }
 }

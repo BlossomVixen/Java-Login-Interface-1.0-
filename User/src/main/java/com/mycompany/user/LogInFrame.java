@@ -3,8 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.user;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+
 /**
  *
  * @author BlossomVixen
@@ -17,7 +21,8 @@ public class LogInFrame extends javax.swing.JFrame {
     ArrayList<User> users; // All users will be stored here 
     public LogInFrame() {
         initComponents();
-        users  = new ArrayList<>();
+        users = new ArrayList<>();
+        LoadFrame(users);
     }
 
     /**
@@ -127,6 +132,26 @@ public class LogInFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void LoadFrame(ArrayList<User> users)
+    {
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
+            
+            String n;
+            String name;
+            String email;
+            String password;
+            
+            while ((n = reader.readLine()) != null)
+            {
+                name = n;
+                email = reader.readLine();
+                password = reader.readLine();
+                users.add(new User(name, email, password));
+            }
+            reader.close();
+        } catch(IOException ioe) { JOptionPane.showMessageDialog(null, "Something went wrong");}
+    }
     private void LogInBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInBTNActionPerformed
         // TODO add your handling code here:
         //Checking for invalid emails:
@@ -151,6 +176,8 @@ public class LogInFrame extends javax.swing.JFrame {
         RegisterDialog rd = new RegisterDialog(this, true, users); // Open the register dialog
         rd.setVisible(true);
     }//GEN-LAST:event_RegisterBTNActionPerformed
+
+    
 
     /**
      * @param args the command line arguments

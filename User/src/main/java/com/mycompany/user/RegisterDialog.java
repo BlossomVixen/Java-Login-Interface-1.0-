@@ -4,6 +4,8 @@
  */
 package com.mycompany.user;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -119,6 +121,18 @@ public class RegisterDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+        
+    private void WriteOnFile(User u)
+    {
+        String v = "!abcdefghijklmnopqrstuvwxyz1"; // so even if it's public, other methods can't get the info
+        
+        try{
+            FileWriter writer = new FileWriter("users.txt", true); // boolean true is to avoid overwriting the file each time
+            writer.write(u.getInfo(v));
+            writer.close();
+        } catch (IOException ioe) { JOptionPane.showMessageDialog(null, "Something went wrong"); }
+    }
     private void RegisterBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBTNActionPerformed
         // TODO add your handling code here:
         
@@ -154,7 +168,9 @@ public class RegisterDialog extends javax.swing.JDialog {
         boolean valid = isEmailValid && isPasswordValid && isNameValid;
         if(valid)
         {
-            users.add(new User(name, email, password));
+            User u = new User(name, email, password);
+            users.add(u);
+            WriteOnFile(u);
             JOptionPane.showMessageDialog(null, "Your account has been succesfully created. Please Close this window and return to the log-in page.");
             
         }
